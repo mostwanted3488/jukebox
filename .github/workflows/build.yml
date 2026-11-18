@@ -45,8 +45,11 @@ jobs:
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
-          New-Item -ItemType Directory -Force dist | Out-Null
-          Compress-Archive -Path build/Jukebox_artefacts/Release/VST3/JUKEBOX.vst3 -DestinationPath dist/JUKEBOX-Windows-VST3.zip
+          New-Item -ItemType Directory -Force dist, pkg/JUKEBOX-Windows | Out-Null
+          Copy-Item -Recurse build/Jukebox_artefacts/Release/VST3/JUKEBOX.vst3 pkg/JUKEBOX-Windows/
+          Copy-Item "packaging/HOW TO INSTALL - Windows.txt" "pkg/JUKEBOX-Windows/HOW TO INSTALL.txt"
+          Compress-Archive -Path pkg/JUKEBOX-Windows -DestinationPath dist/JUKEBOX-Windows.zip
+          Get-ChildItem -Recurse pkg/JUKEBOX-Windows -Depth 1 | Select-Object -ExpandProperty FullName
 
       - name: Package (macOS, ad-hoc signed)
         if: runner.os == 'macOS'
@@ -59,8 +62,12 @@ jobs:
           done
           codesign --force --deep --sign - VST3/JUKEBOX.vst3
           codesign --force --deep --sign - AU/JUKEBOX.component
-          ditto -c -k --keepParent VST3/JUKEBOX.vst3 "$GITHUB_WORKSPACE/dist/JUKEBOX-macOS-VST3.zip"
-          ditto -c -k --keepParent AU/JUKEBOX.component "$GITHUB_WORKSPACE/dist/JUKEBOX-macOS-AU.zip"
+          P="$GITHUB_WORKSPACE/pkg/JUKEBOX-macOS"; mkdir -p "$P"
+          ditto VST3/JUKEBOX.vst3 "$P/JUKEBOX.vst3"
+          ditto AU/JUKEBOX.component "$P/JUKEBOX.component"
+          cp "$GITHUB_WORKSPACE/packaging/HOW TO INSTALL - macOS.txt" "$P/HOW TO INSTALL.txt"
+          ditto -c -k --keepParent "$P" "$GITHUB_WORKSPACE/dist/JUKEBOX-macOS.zip"
+          zipinfo -1 "$GITHUB_WORKSPACE/dist/JUKEBOX-macOS.zip" | grep -v "/Contents/." 
 
       - uses: actions/upload-artifact@v4
         with:

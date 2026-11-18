@@ -39,12 +39,12 @@ Only the timbres are modelled, not the melodies. All ten discs are level-matched
 Download the zip for your system from the **Actions** tab (latest successful *Build* run → *Artifacts*) or from **Releases**.
 
 **Windows (FL Studio, Ableton, …)**
-1. Unzip `JUKEBOX-Windows-VST3.zip`.
+1. Unzip `JUKEBOX-Windows.zip` (a `HOW TO INSTALL.txt` is included).
 2. Copy `JUKEBOX.vst3` to `C:\Program Files\Common Files\VST3\`.
 3. In FL Studio: *Options → Manage plugins → Find installed plugins*, then add **JUKEBOX** as a generator.
 
 **macOS**
-1. Unzip, then copy `JUKEBOX.vst3` to `~/Library/Audio/Plug-Ins/VST3/` (and `JUKEBOX.component` to `~/Library/Audio/Plug-Ins/Components/` for Logic).
+1. Unzip `JUKEBOX-macOS.zip` (VST3 + AU + `HOW TO INSTALL.txt`), then copy `JUKEBOX.vst3` to `~/Library/Audio/Plug-Ins/VST3/` (and `JUKEBOX.component` to `~/Library/Audio/Plug-Ins/Components/` for Logic).
 2. The build is not notarised, so remove the quarantine flag once in Terminal:
    ```
    xattr -cr ~/Library/Audio/Plug-Ins/VST3/JUKEBOX.vst3 ~/Library/Audio/Plug-Ins/Components/JUKEBOX.component

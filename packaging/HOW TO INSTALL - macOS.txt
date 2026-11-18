@@ -1,0 +1,33 @@
+JUKEBOX - by BUY OR BE A LOSER (@buyorbealoser)
+================================================
+
+HOW TO INSTALL (macOS)
+
+1. Copy the plugin(s) into your plugin folders
+   - JUKEBOX.vst3      ->  ~/Library/Audio/Plug-Ins/VST3/
+                           (FL Studio, Ableton, Bitwig, Studio One, Reaper...)
+   - JUKEBOX.component ->  ~/Library/Audio/Plug-Ins/Components/
+                           (Logic Pro, GarageBand)
+
+   Tip: in Finder press Cmd + Shift + G and paste the folder path.
+   "~" means your user folder (the "Library" folder is hidden by default).
+
+2. Allow the plugin to load (needed once)
+   The plugin is not notarised by Apple, so macOS blocks it until you run
+   this command. Open the Terminal app and paste:
+
+   xattr -cr ~/Library/Audio/Plug-Ins/VST3/JUKEBOX.vst3 ~/Library/Audio/Plug-Ins/Components/JUKEBOX.component
+
+   then press Enter.
+
+3. Rescan your plugins
+   - FL Studio: Options > Manage plugins > Find installed plugins,
+     then add JUKEBOX as a generator (Instrument > BUY OR BE A LOSER > JUKEBOX).
+   - Logic: restart Logic, it validates the AU automatically.
+
+Works on Apple Silicon (M1/M2/M3/M4) and Intel Macs, macOS 10.13 or newer.
+
+HOW TO USE
+- Drag a disc into the jukebox (or click it). Click the jukebox to eject.
+- Play from your piano roll / MIDI keyboard.
+- Lever (or L key): redstone pulse gate synced to your project tempo.

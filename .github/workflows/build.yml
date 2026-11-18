@@ -21,13 +21,13 @@ jobs:
           - name: Windows
             os: windows-latest
           - name: macOS
-            os: macos-14
+            os: macos-latest
     steps:
       - uses: actions/checkout@v4
 
       - name: Configure (Windows)
         if: runner.os == 'Windows'
-        run: cmake -B build -G "Visual Studio 17 2022" -A x64
+        run: cmake -B build -A x64   # default generator = the Visual Studio installed on the runner
 
       - name: Configure (macOS, universal arm64 + x86_64)
         if: runner.os == 'macOS'

@@ -24,9 +24,9 @@ endif()
 
 juce_add_plugin(Jukebox
     PRODUCT_NAME "JUKEBOX"
-    COMPANY_NAME "Underwater Palace"
-    BUNDLE_ID com.underwaterpalace.jukebox
-    PLUGIN_MANUFACTURER_CODE Uwpl
+    COMPANY_NAME "BUY OR BE A LOSER"
+    BUNDLE_ID com.buyorbealoser.jukebox
+    PLUGIN_MANUFACTURER_CODE Bobl
     PLUGIN_CODE Jkbx
     FORMATS ${JUKEBOX_FORMATS}
     IS_SYNTH TRUE

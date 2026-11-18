@@ -79,4 +79,4 @@ The jukebox and disc textures and the Minecraft font are third-party assets supp
 Check their licences before distributing the plugin commercially.
 
 ---
-Underwater Palace
+BUY OR BE A LOSER - @buyorbealoser

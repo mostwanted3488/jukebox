@@ -112,6 +112,7 @@
   .lbl { font-family: 'Minecraft', monospace; font-size: 16px; color: #6d675d; pointer-events: none; text-align: center; line-height: 1.2; }
   .bk .lbl { color: #8a847a; }
   .lbl b { display: block; font-weight: 400; color: #a19a8e; font-size: 8px; margin-top: 4px; }
+  #sig { position: fixed; right: 28px; bottom: 16px; font-size: 16px; color: color-mix(in srgb, var(--tint) 35%, #8f8c86); transition: color .8s; pointer-events: none; }
   #toast { position: fixed; left: 50%; bottom: 26px; transform: translateX(-50%); font-family: 'Minecraft', monospace; font-size: 16px; letter-spacing: 0;
     background: #0e0e10; border: 3px solid var(--tint); padding: 8px 14px; opacity: 0; transition: opacity .3s; pointer-events: none; z-index: 50; }
   #toast.show { opacity: 1; }
@@ -175,6 +176,7 @@
     <div id="keys"></div>
   </div>
 </section>
+<div id="sig">@buyorbealoser</div>
 <div id="toast"></div>
 
 <script>

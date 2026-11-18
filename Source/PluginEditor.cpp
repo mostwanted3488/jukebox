@@ -217,6 +217,9 @@ void Content::paint (juce::Graphics& g)
     const int base = proc.getOctaveBase();
     label ("C" + juce::String (base / 12 - 1) + "-C" + juce::String (base / 12 + 1), 648, 364, 80, col::label, 16.0f, juce::Justification::centred);
     label ("play from your piano roll or click the keys", 772, 364, 320, col::dim);
+
+    // signature
+    label ("@buyorbealoser", 500, 582, 600, mix (tc, col::dim, .35f), 16.0f, juce::Justification::centredRight);
 }
 
 void Content::paintOverChildren (juce::Graphics& g)

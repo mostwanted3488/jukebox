@@ -53,6 +53,10 @@ jobs:
         run: |
           mkdir -p dist
           cd build/Jukebox_artefacts/Release
+          for b in VST3/JUKEBOX.vst3/Contents/MacOS/JUKEBOX AU/JUKEBOX.component/Contents/MacOS/JUKEBOX; do
+            lipo -info "$b"
+            lipo "$b" -verify_arch arm64 x86_64   # fail unless universal (Apple Silicon + Intel)
+          done
           codesign --force --deep --sign - VST3/JUKEBOX.vst3
           codesign --force --deep --sign - AU/JUKEBOX.component
           ditto -c -k --keepParent VST3/JUKEBOX.vst3 "$GITHUB_WORKSPACE/dist/JUKEBOX-macOS-VST3.zip"

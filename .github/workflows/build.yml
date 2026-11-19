@@ -61,7 +61,9 @@ jobs:
             lipo "$b" -verify_arch arm64 x86_64   # fail unless universal (Apple Silicon + Intel)
             # fail unless every slice runs on macOS 10.13+ (minos = minimum macOS the binary accepts)
             for a in arm64 x86_64; do
-              m=$(vtool -arch $a -show-build "$b" | awk '/minos/ {print $2}')
+              vtool -arch $a -show-build "$b"
+              # LC_BUILD_VERSION shows "minos X", older targets (< 10.14) use LC_VERSION_MIN_MACOSX "version X"
+              m=$(vtool -arch $a -show-build "$b" | awk '$1=="minos" || $1=="version" {print $2; exit}')
               echo "$b [$a] minos $m"
               python3 -c "import sys; v=tuple(map(int,'$m'.split('.'))); sys.exit(0 if v <= (11,0) else 1)" || { echo "::error::$b ($a) requires macOS $m"; exit 1; }
             done

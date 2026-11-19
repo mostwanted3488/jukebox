@@ -1,9 +1,10 @@
 cmake_minimum_required(VERSION 3.22)
-project(JUKEBOX VERSION 1.0.0 LANGUAGES C CXX)
+# Must be set BEFORE project(), otherwise CMake ignores it and targets the build machine's macOS.
+set(CMAKE_OSX_DEPLOYMENT_TARGET "10.13" CACHE STRING "Minimum macOS version")
+project(JUKEBOX VERSION 1.0.1 LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_OSX_DEPLOYMENT_TARGET "10.13" CACHE STRING "Minimum macOS version")
 # Static MSVC runtime: the plugin loads without installing the Visual C++ redistributable.
 set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 

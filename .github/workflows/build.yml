@@ -31,7 +31,7 @@ jobs:
 
       - name: Configure (macOS, universal arm64 + x86_64)
         if: runner.os == 'macOS'
-        run: cmake -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64"
+        run: cmake -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64" -DCMAKE_OSX_DEPLOYMENT_TARGET=10.13
 
       - name: Build VST3 (Windows)
         if: runner.os == 'Windows'
@@ -59,6 +59,12 @@ jobs:
           for b in VST3/JUKEBOX.vst3/Contents/MacOS/JUKEBOX AU/JUKEBOX.component/Contents/MacOS/JUKEBOX; do
             lipo -info "$b"
             lipo "$b" -verify_arch arm64 x86_64   # fail unless universal (Apple Silicon + Intel)
+            # fail unless every slice runs on macOS 10.13+ (minos = minimum macOS the binary accepts)
+            for a in arm64 x86_64; do
+              m=$(vtool -arch $a -show-build "$b" | awk '/minos/ {print $2}')
+              echo "$b [$a] minos $m"
+              python3 -c "import sys; v=tuple(map(int,'$m'.split('.'))); sys.exit(0 if v <= (11,0) else 1)" || { echo "::error::$b ($a) requires macOS $m"; exit 1; }
+            done
           done
           codesign --force --deep --sign - VST3/JUKEBOX.vst3
           codesign --force --deep --sign - AU/JUKEBOX.component
